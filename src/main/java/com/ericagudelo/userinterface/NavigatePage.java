@@ -1,6 +1,7 @@
 package com.ericagudelo.userinterface;
 
 import io.appium.java_client.MobileBy;
+import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.targets.Target;
 
 import static net.serenitybdd.screenplay.targets.BaseTarget.the;

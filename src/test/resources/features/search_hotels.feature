@@ -3,11 +3,10 @@ Feature: Servicio de Alojamiento
   Quiero seleccionar una alojamiento en la application
   Para realizar la reserva
 
-  Scenario: Reserva de Alojamiento para dos personas y un infante
-    Given que "Erik" se encuentra en la pagina
-    When el usuario ingrese la ciudad destino "CUSCO"
-    And la fecha de estadia "14 Febrero" a "28 Febrero" del 2023
-    And selecciona el numero de habitacion "1" el numero adultos "1"
-    And la edad de los niños "5" años y "1" niño
-    Then el usuario deberia poder realizar la reserva del alojamiento
+  Scenario: Reservar en el mismo mes un alojamiento para dos personas adultas y un infante
+    Given que "Erik" abre la app de booking para navegar e ingrese la ciudad destino "cusco"
+    And selecciona la fecha de estadia es del "10 August 2023" al "20 August 2023"
+    And al seleccionar "3" habitacion o habitaciones "4" adulto o adultos y "5" niño o niños
+    When elige la habitacion y realiza la reserva
+    Then el usuario deberia poder realizar la reserva exitosamente
 

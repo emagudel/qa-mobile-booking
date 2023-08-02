@@ -31,8 +31,6 @@ public class AddReservaPersonal implements Interaction {
         this.cityPersonal = cityPersonal;
         this.countryPersonal = countryPersonal;
         this.phoneNumberPersonal = phoneNumberPersonal;
-
-
     }
 
     @Override
@@ -44,43 +42,28 @@ public class AddReservaPersonal implements Interaction {
             List<WebElement> autoCompleteView = driver.findElements(By.xpath("//android.widget.AutoCompleteTextView"));
             if(formsPartI.size()==5) {
                 formsPartI.get(0).sendKeys(namePersonal);
-
                 formsPartI.get(1).sendKeys(lastNamePersonal);
-
                 autoCompleteView.get(0).sendKeys(emailPersonal);
-
                 formsPartI.get(2).sendKeys(addressPersonal);
-
                 formsPartI.get(3).sendKeys(zipCodePersonal);
-
                 formsPartI.get(4).sendKeys(cityPersonal);
                 driver.findElement(By.id("com.booking:id/action_button")).click();
-
                 formsPartI = driver.findElements(By.xpath("//android.widget.EditText"));
                 autoCompleteView = driver.findElements(By.xpath("//android.widget.AutoCompleteTextView"));
                 autoCompleteView.get(1).clear();
                 autoCompleteView.get(1).sendKeys(countryPersonal);
-
                 formsPartI.get(3).sendKeys(phoneNumberPersonal);
                 driver.findElement(By.id("com.booking:id/action_button")).click();
-
             }
             else{
                 formsPartI.get(0).sendKeys(namePersonal);
-
                 formsPartI.get(1).sendKeys(lastNamePersonal);
-
                 autoCompleteView.get(0).sendKeys(emailPersonal);
-
                 autoCompleteView.get(1).clear();
                 autoCompleteView.get(1).sendKeys(countryPersonal);
-
                 formsPartI.get(2).sendKeys(phoneNumberPersonal);
-
                 driver.findElement(By.id("com.booking:id/action_button")).click();
-
             }
-
         } catch (Exception ignored) {}
     }
 

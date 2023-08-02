@@ -10,6 +10,9 @@ public class RoomsGuesPages {
     public static final Target BTN_OK = the("CLIK en Boton OK")
             .located(MobileBy.id("android:id/button1"));
 
+    public static final Target SELECT_ROOM_AND_PERSONS = the("Seleccion de la habitacion y personas")
+            .located(MobileBy.id("bui_input_stepper_value"));
+
     public static final Target BTN_APPLY= the("CLIK Boton Aplicar")
             .located(MobileBy.id("com.booking:id/group_config_apply_button"));
 

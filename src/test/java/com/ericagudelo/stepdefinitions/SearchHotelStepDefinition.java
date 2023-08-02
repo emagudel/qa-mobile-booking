@@ -1,6 +1,8 @@
 package com.ericagudelo.stepdefinitions;
-import com.ericagudelo.tasks.Search;
-import com.ericagudelo.tasks.SearchCountry;
+
+import com.ericagudelo.interactions.AddReservaPersonal;
+import com.ericagudelo.tasks.*;
+import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
@@ -9,39 +11,41 @@ import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
 public class SearchHotelStepDefinition {
-    @Given("que {string} se encuentra en la pagina")
-    public void  que_Usuario_se_encuentra_en_la_pagina(String actor) {
+    @Given("que {string} abre la app de booking para navegar e ingrese la ciudad destino {string}")
+    public void que_Usuario_se_encuentra_en_la_pagina_para_seleccionar_destino(String actor, String destination) {
         theActorCalled(actor).attemptsTo(
-                Search.searchDestination()
-        );
-     }
-
-    @When("el usuario ingrese la ciudad destino {string}")
-    public void el_usuario_ingrese_la_ciudad_destino(String destino) {
-
-       theActorInTheSpotlight().attemptsTo(
-                SearchCountry.searchCountry()
-
+                Search.searchDestination(destination)
         );
     }
 
-    @When("la fecha de estadia {string} a {string} del 2023")
-    public void la_fecha_de_estadia(String ini, String fin) {throw new io.cucumber.java.PendingException();
-
+    @And("selecciona la fecha de estadia es del {string} al {string}")
+    public void la_fecha_de_estadia(String start, String end) {
+        theActorInTheSpotlight().attemptsTo(
+                SearchDates.available(start, end)
+        );
     }
 
-    @When("selecciona el numero de habitacion {string} el numero adultos {string}")
-    public void selecciona_el_numero_de_habitacion_el_numero_adultos(String habitacion, String nroAdultos) {
-        throw new io.cucumber.java.PendingException();
+    @And("al seleccionar {string} habitacion o habitaciones {string} adulto o adultos y {string} niño o niños")
+    public void selecciona_el_numero_de_habitacion_el_numero_adultos(String rooms, String adults, String children) {
+        theActorInTheSpotlight().attemptsTo(
+                SearchRoomAndPerson.apply(rooms, adults, children)
+        );
     }
 
-    @When("la edad de los niños {string} años y {string} niño")
-    public void la_edad_de_los_niños() {
-        throw new io.cucumber.java.PendingException();
+    @When("elige la habitacion y realiza la reserva")
+    public void eligeLaHabitacion_y_realizaLaReserva() {
+        theActorInTheSpotlight().attemptsTo(
+                ChooseRoom.inApp()
+        );
     }
 
-    @Then("el usuario deberia poder realizar la reserva del alojamiento")
-    public void el_usuario_deberia_poder_realizar_la_reserva_del_alojamiento() {
-        throw new io.cucumber.java.PendingException();
+
+    @Then("el usuario deberia poder realizar la reserva exitosamente")
+    public void el_usuario_deberia_poder_realizar_la_reserva_exitosamente() {
+        theActorInTheSpotlight().attemptsTo(
+                AddReservaPersonal.enterParameter()
+                //FillInformation.inApp()
+        );
+
     }
 }

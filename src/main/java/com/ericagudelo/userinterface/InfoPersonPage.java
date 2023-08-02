@@ -7,13 +7,17 @@ import static net.serenitybdd.screenplay.targets.Target.the;
 
 public class InfoPersonPage {
 
-    public static final Target FIRST_NAMEs = Target.the("First Name")
-            .locatedBy("//android.widget.TextView[@text='First Name *']android.widget.EditText[@resource-id='com.booking:id/bui_input_container_content']");
-    public static final Target LAST_NAME= the("Last Name")
-            .located(MobileBy.id("com.booking:id/lastname"));
+    public static final Target FIRST_NAME = Target.the("Nombre")
+            .located(MobileBy.id("bstage1_contact_firstname_value"));
+    public static final Target LAST_NAME= the("Apellido")
+            .located(MobileBy.id("bstage1_contact_lastname_value"));
+    public static final Target EMAIL_ADDRESS= the("Direccion:")
+            .located(MobileBy.id("bstage1_contact_email_value"));
+    public static final Target COUNTYR= the("Pais")
+            .located(MobileBy.id("bstage1_contact_country_value"));
+    public static final Target PHONE_NUMBER= the("Telefono celular")
+            .located(MobileBy.id("bstage1_contact_telephone_value"));
+    public static final Target BTN_NEXT_STEP= the("Boton siguiente paso")
+            .located(MobileBy.id("action_button"));
 
-    public static final Target FIRST_NAME= the("Last Name")
-            .located(MobileBy.id("com.booking:id/bstage1_contact_firstname_value"));
-    public static final Target EMAIL_ADDRESS= the("Email Address:")
-            .located(MobileBy.id("com.booking:id/email"));
 }
