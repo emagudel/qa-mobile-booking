@@ -5,7 +5,6 @@ import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.actions.Click;
 
-import static com.ericagudelo.userinterface.RoomsGuesPages.BTN_APPLY;
 import static com.ericagudelo.userinterface.SearchPage.BTN_SEARCHDATA;
 import static com.ericagudelo.userinterface.SearchPage.BTN_SEARCH_ROOM;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
@@ -24,8 +23,7 @@ public class SearchRoomAndPerson implements Task {
     public <T extends Actor> void performAs(T actor) {
         actor.attemptsTo(
                 Click.on(BTN_SEARCH_ROOM),
-                SelectionRoomAndPerson.apply(rooms, adults, children),
-                Click.on(BTN_APPLY)
+                SelectionRoomAndPerson.enterParameter(rooms,adults,children)
         );
         actor.attemptsTo(
                 Click.on(BTN_SEARCHDATA)

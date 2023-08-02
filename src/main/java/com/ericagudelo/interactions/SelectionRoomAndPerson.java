@@ -1,14 +1,15 @@
 package com.ericagudelo.interactions;
 
-import net.serenitybdd.core.pages.WebElementFacade;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
-import net.serenitybdd.screenplay.actions.type.Type;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.ericagudelo.userinterface.RoomsGuesPages.SELECT_ROOM_AND_PERSONS;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
+import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getProxiedDriver;
 
 public class SelectionRoomAndPerson implements Interaction {
 
@@ -22,23 +23,23 @@ public class SelectionRoomAndPerson implements Interaction {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        List<WebElementFacade> listValue = SELECT_ROOM_AND_PERSONS.resolveAllFor(actor);
-        Type.theValue(listValue.get(0).getElement().getText()).into(rooms);
-        Type.theValue(listValue.get(0).getElement().getText()).into(adults);
-        Type.theValue(listValue.get(2).getElement().getText()).into(children);
-
-        /*
-        for (int iterador = 0; iterador < listValue.size(); iterador++) {
-            String dateCalendar = listValue.get(iterador).getElement();
-            if(dateCalendar.contains(date)){
-                SELECT_ROOM_AND_PERSONS.resolveAllFor(actor).get(iterador).click();
-                break;
+        WebDriver driver = getProxiedDriver();
+        try {
+            List<WebElement> fieldsForm = driver.findElements(By.id("com.booking:id/bui_input_stepper_value"));
+            if (fieldsForm.size() == 3) {
+                fieldsForm.get(0).clear();
+                fieldsForm.get(0).sendKeys(rooms);
+                fieldsForm.get(1).clear();
+                fieldsForm.get(1).sendKeys(adults);
+                fieldsForm.get(2).clear();
+                fieldsForm.get(2).sendKeys(children);
+                driver.findElement(By.id("com.booking:id/group_config_apply_button")).click();
             }
+        } catch (Exception ignored) {
         }
-        */
     }
 
-    public static SelectionRoomAndPerson apply(String rooms, String adults, String children){
+    public static SelectionRoomAndPerson enterParameter(String rooms, String adults, String children) {
         return instrumented(SelectionRoomAndPerson.class, rooms, adults, children);
     }
 

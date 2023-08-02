@@ -1,6 +1,5 @@
 package com.ericagudelo.stepdefinitions;
 
-import com.ericagudelo.interactions.AddReservaPersonal;
 import com.ericagudelo.tasks.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -43,8 +42,7 @@ public class SearchHotelStepDefinition {
     @Then("el usuario deberia poder realizar la reserva exitosamente")
     public void el_usuario_deberia_poder_realizar_la_reserva_exitosamente() {
         theActorInTheSpotlight().attemptsTo(
-                AddReservaPersonal.enterParameter()
-                //FillInformation.inApp()
+                AddInformation.inApp()
         );
 
     }
