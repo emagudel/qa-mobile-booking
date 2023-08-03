@@ -2,45 +2,58 @@ package com.ericagudelo.interactions;
 
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Interaction;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import net.serenitybdd.screenplay.actions.Click;
 
-import java.util.List;
-
+import static com.ericagudelo.userinterface.SearchPage.*;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
-import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getProxiedDriver;
 
 public class SelectionRoomAndPerson implements Interaction {
 
-    private String rooms, adults, children;
+    private String rooms, adults, children, old;
 
-    public SelectionRoomAndPerson(String rooms, String adults, String children) {
+    public SelectionRoomAndPerson(String rooms, String adults, String children, String old) {
         this.rooms = rooms;
         this.adults = adults;
         this.children = children;
+        this.old = old;
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        WebDriver driver = getProxiedDriver();
-        try {
-            List<WebElement> fieldsForm = driver.findElements(By.id("com.booking:id/bui_input_stepper_value"));
-            if (fieldsForm.size() == 3) {
-                fieldsForm.get(0).clear();
-                fieldsForm.get(0).sendKeys(rooms);
-                fieldsForm.get(1).clear();
-                fieldsForm.get(1).sendKeys(adults);
-                fieldsForm.get(2).clear();
-                fieldsForm.get(2).sendKeys(children);
-                driver.findElement(By.id("com.booking:id/group_config_apply_button")).click();
+        int num_room_default = Integer.parseInt(NUM_ROOMS.resolveFor(actor).getText());
+        int num_adult_default = Integer.parseInt(NUM_ADULTS.resolveFor(actor).getText());
+        int num_child_default = Integer.parseInt(NUM_CHILDREN.resolveFor(actor).getText());
+        int num_room = Integer.parseInt(rooms) - num_room_default;
+        int num_adults = Integer.parseInt(adults) - num_adult_default;
+        int num_children = Integer.parseInt(children) - num_child_default;
+
+        if (num_room_default != 1) {
+            for (int numRooms = 0; numRooms < num_room; numRooms++) {
+                actor.attemptsTo(
+                        Click.on(SELECT_NUM_ROOMS_AND_PERSONS.of("rooms"))
+                );
             }
-        } catch (Exception ignored) {
+        }
+        if (num_room_default != 2) {
+            for (int numAdults = 0; numAdults < num_adults; numAdults++) {
+                actor.attemptsTo(
+                        Click.on(SELECT_NUM_ROOMS_AND_PERSONS.of("adults"))
+                );
+            }
+        }
+        for (int numChildren = 0; numChildren < num_children; numChildren++) {
+            actor.attemptsTo(
+                    Click.on(SELECT_NUM_ROOMS_AND_PERSONS.of("children")),
+                    SelectNumberPicker.on(old),
+                    Click.on(BTN_OK),
+                    Click.on(BTN_APPLY)
+            );
+
         }
     }
 
-    public static SelectionRoomAndPerson enterParameter(String rooms, String adults, String children) {
-        return instrumented(SelectionRoomAndPerson.class, rooms, adults, children);
+    public static SelectionRoomAndPerson enterParameter(String rooms, String adults, String children, String old) {
+        return instrumented(SelectionRoomAndPerson.class, rooms, adults, children, old);
     }
 
 }

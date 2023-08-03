@@ -12,17 +12,17 @@ public class SelectNumberPicker implements Interaction {
     private final String selectYear;
 
     public SelectNumberPicker(String selectYear) {
-        this.selectYear=selectYear;
+        this.selectYear = selectYear;
 
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
         WebDriver driver = getProxiedDriver();
-        driver.findElement(MobileBy.AndroidUIAutomator(String.format("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"%s\"))",selectYear))).click();
+        driver.findElement(MobileBy.AndroidUIAutomator(String.format("new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text(\"%s\"))", selectYear)));
     }
 
-    public static SelectNumberPicker on(String selectYear){
+    public static SelectNumberPicker on(String selectYear) {
         return Instrumented.instanceOf(SelectNumberPicker.class).withProperties(selectYear);
     }
 }

@@ -28,7 +28,7 @@ public class AddTextField implements Interaction {
                 autoCompleteView.get(1).sendKeys("Colombia");
                 formsPartI.get(2).sendKeys("300300300");
                 driver.findElement(By.id("com.booking:id/action_button")).click();
-                driver.wait(5000);
+                driver.wait(2000);
                 driver.findElement(By.id("com.booking:id/action_button")).click();
                 driver.wait(5000);
             }
