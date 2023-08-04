@@ -37,7 +37,7 @@ public class Search implements Task {
                     Click.on(LBL_CITY.of(destination))
             );
         }else {
-            WaitUntil.the(DESTINATION_ERROR,isEnabled()).forNoMoreThan(5).seconds();
+            WaitUntil.the(DESTINATION_ERROR,isEnabled()).forNoMoreThan(10).seconds();
             DESTINATION_ERROR_MESSAGE = DESTINATION_ERROR.resolveFor(actor).getText().trim();
         }
     }
