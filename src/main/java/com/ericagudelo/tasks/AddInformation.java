@@ -17,7 +17,6 @@ public class AddInformation implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
-        WebDriver driver = getProxiedDriver();
         actor.attemptsTo(
                 AddTextField.enterParameter()
         );

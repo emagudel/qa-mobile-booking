@@ -26,7 +26,7 @@ public class AddTextField implements Interaction {
         try {
             List<WebElement> numEditText = driver.findElements(By.className("android.widget.EditText"));
             List<WebElement> numAutoCompleteTextView = driver.findElements(By.className("android.widget.AutoCompleteTextView"));
-            if (numEditText.size()==5 || numEditText.size()==4) {
+            if (numEditText.size() >=4) {
                 numEditText.get(0).sendKeys("Erik");
                 numEditText.get(1).sendKeys("Agudelo");
                 numAutoCompleteTextView.get(0).sendKeys("goku@goku.com");
