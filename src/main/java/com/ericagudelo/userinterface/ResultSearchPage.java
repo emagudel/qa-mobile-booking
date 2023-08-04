@@ -16,7 +16,9 @@ public class ResultSearchPage {
     public static final Target RESERVE_THESE_OPTIONS = the("Boton elegir habitacion")
             .located(MobileBy.xpath("//android.widget.Button[@text='Reserve these options']"));
     public static final Target SELECT_ROOM= the("Boton elegir habitacion")
-            .located(MobileBy.xpath("//android.widget.TextView[@text='SELECT']"));
+            .located(MobileBy.xpath("//android.widget.TextView[@text='SELECT' or @text='Select and customize']"));
+    public static final Target BTN_CONFIRM= the("Boton customize confirm habitacion")
+            .located(MobileBy.xpath("//android.widget.Button[@text='Confirm']"));
     public static final Target BTN_RESERVA = the("Realizar Reserva")
             .located(MobileBy.xpath("//android.widget.Button[@text='Reserve']"));
     public static final Target NOT_CREDIT_CARD = the("No necesita tarjeta de credito")

@@ -29,6 +29,7 @@ public class SearchPage {
             .located(MobileBy.id("com.booking:id/group_config_apply_button"));
     public static final Target LIST_YEAR_OLD = the("//android.widget.FrameLayout//android.widget.NumberPicker//android.widget.EditText")
             .located(MobileBy.id("android:id/button1"));
-
+    public static final Target DESTINATION_ERROR = the("Mensaje de error destino no existe")
+            .located(MobileBy.className("android.widget.TextView"));
 
 }

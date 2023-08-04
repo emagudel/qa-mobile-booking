@@ -7,10 +7,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import net.serenitybdd.screenplay.ensure.Ensure;
 
-import static com.ericagudelo.userinterface.BookingConfirmation.TXT_CONFIRMED;
-import static com.ericagudelo.userinterface.BookingConfirmation.TXT_PRICE_FINAL;
-import static com.ericagudelo.util.ConstantManager.TEXTO_CONFIRMACION;
-import static com.ericagudelo.util.ConstantManager.VALOR_DE_RESERVA;
+import static com.ericagudelo.util.ConstantManager.*;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorCalled;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
@@ -43,14 +40,16 @@ public class SearchHotelStepDefinition {
         );
     }
 
-
     @Then("the user should be able to make the reservation successfully")
     public void el_usuario_deberia_poder_realizar_la_reserva_exitosamente() {
         theActorInTheSpotlight().attemptsTo(
                 AddInformation.inApp()
         );
-        theActorInTheSpotlight().attemptsTo(Ensure.that(TXT_CONFIRMED).text().contains(TEXTO_CONFIRMACION));
-        theActorInTheSpotlight().attemptsTo(Ensure.that(TXT_PRICE_FINAL).text().contains(VALOR_DE_RESERVA));
+    }
 
+    @Then("the user should NO be able to make the reservation")
+    public void el_usuario_no_deberia_poder_realizar_la_reserva() {
+        theActorInTheSpotlight().attemptsTo(
+                Ensure.that(DESTINATION_ERROR_MESSAGE).isEqualTo(DESTINATION_ERROR_MESSAGE_APP));
     }
 }

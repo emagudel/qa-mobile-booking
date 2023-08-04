@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
-import static com.ericagudelo.userinterface.BookingConfirmation.BTN_BOOK_NOW_OR_STEP_NEXT;
 import static com.ericagudelo.userinterface.BookingConfirmation.POPUP_ALERT;
 import static net.serenitybdd.screenplay.Tasks.instrumented;
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getProxiedDriver;
@@ -25,35 +24,28 @@ public class AddTextField implements Interaction {
         }
         WebDriver driver = getProxiedDriver();
         try {
-            List<WebElement> formsPartI = driver.findElements(By.className("//android.widget.EditText"));
-            List<WebElement> autoCompleteView = driver.findElements(By.className("//android.widget.AutoCompleteTextView"));
-            if (formsPartI.size()==5) {
-                formsPartI.get(0).sendKeys("Erik");
-                formsPartI.get(1).sendKeys("Agudelo");
-                autoCompleteView.get(0).sendKeys("e@e.com");
-                formsPartI.get(3).sendKeys("Calle 75");
-                formsPartI.get(2).sendKeys("05513");
-                formsPartI.get(4).sendKeys("Medellin");
-                autoCompleteView.get(1).clear();
-                autoCompleteView.get(1).sendKeys("Colombia");
-                formsPartI.get(2).sendKeys("300300300");
-            }else if(formsPartI.size()==4) {
-                formsPartI.get(0).sendKeys("Erik");
-                formsPartI.get(1).sendKeys("Agudelo");
-                autoCompleteView.get(0).sendKeys("e@e.com");
-                formsPartI.get(2).sendKeys("Calle 75");
-                formsPartI.get(3).sendKeys("05513");
-                formsPartI.get(3).sendKeys("Medellin");
-                autoCompleteView.get(1).clear();
-                autoCompleteView.get(1).sendKeys("Colombia");
-                formsPartI.get(2).sendKeys("300300300");
-            }else if(formsPartI.size()==3) {
-                formsPartI.get(0).sendKeys("Erik");
-                formsPartI.get(1).sendKeys("Agudelo");
-                autoCompleteView.get(0).sendKeys("e@e.com");
-                autoCompleteView.get(1).clear();
-                autoCompleteView.get(1).sendKeys("Colombia");
-                formsPartI.get(2).sendKeys("300300300");
+            List<WebElement> numEditText = driver.findElements(By.className("android.widget.EditText"));
+            List<WebElement> numAutoCompleteTextView = driver.findElements(By.className("android.widget.AutoCompleteTextView"));
+            if (numEditText.size()==5 || numEditText.size()==4) {
+                numEditText.get(0).sendKeys("Erik");
+                numEditText.get(1).sendKeys("Agudelo");
+                numAutoCompleteTextView.get(0).sendKeys("goku@goku.com");
+                numEditText.get(2).sendKeys("Calle 75");
+                numEditText.get(3).sendKeys("05513");
+                driver.findElement(By.id("com.booking:id/action_button")).click();
+                numEditText = driver.findElements(By.xpath("//android.widget.EditText"));
+                numEditText.get(2).sendKeys("Medellin");
+                numAutoCompleteTextView = driver.findElements(By.xpath("//android.widget.AutoCompleteTextView"));
+                numAutoCompleteTextView.get(0).clear();
+                numAutoCompleteTextView.get(0).sendKeys("Colombia");
+                numEditText.get(3).sendKeys("300300300");
+            }else{
+                numEditText.get(0).sendKeys("Erik");
+                numEditText.get(1).sendKeys("Agudelo");
+                numAutoCompleteTextView.get(0).sendKeys("goku@goku.com");
+                numAutoCompleteTextView.get(1).clear();
+                numAutoCompleteTextView.get(1).sendKeys("Colombia");
+                numEditText.get(2).sendKeys("300300300");
             }
         } catch (Exception ignored) {
         }
